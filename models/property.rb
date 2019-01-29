@@ -2,6 +2,7 @@ require('pg')
 
 class Property
 
+  attr_reader :id
   attr_accessor :address, :value, :number_of_bedrooms, :year_built
 
   def initialize (details)
@@ -69,13 +70,16 @@ class Property
     db.close()
   end
 
-  def Property.find()
+  def Property.find(id)
     db = PG.connect ( {dbname: 'estate_agency', host: 'localhost'})
     sql = "SELECT * FROM estate_agency WHERE id = $1"
-    values = [@id]
+    values = [id]
     db.prepare("find", sql)
-    db.exec_prepared("find", values)
+    results_array = db.exec_prepared("find", values)
     db.close()
+    property_hash = results_array[0]
+    found_property = Property.new(property_hash)
+    return found_property
   end
 
 

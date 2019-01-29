@@ -20,14 +20,13 @@ require('pry')
 
     property_1.save()
     property_2.save()
-    #
-    # property_2.delete()
-    #
-    # property_1.address = 'CodeClan'
-    # property_1.update()
 
-    # property_1.find()
-    # Property.find()
+    property_2.delete()
+
+    property_1.address = 'CodeClan'
+    property_1.update()
+
+    code_clan = Property.find(property_1.id)
 
 
 binding.pry
